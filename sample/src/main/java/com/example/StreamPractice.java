@@ -1,6 +1,10 @@
 package com.example;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamPractice {
 
@@ -21,7 +25,7 @@ public class StreamPractice {
     List<String> names = List.of("Alice", "Bob", "Charlie");
 
     // 以下に回答コードを書いてください
-
+    names.forEach(System.out::println);
 
     /*
       ==========================
@@ -40,7 +44,9 @@ public class StreamPractice {
     List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 
     // 以下に回答コードを書いてください
-
+    numbers.stream()
+        .map(n -> n * 2)
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -57,7 +63,9 @@ public class StreamPractice {
     List<String> words = List.of("apple", "banana", "cherry", "date");
 
     // 以下に回答コードを書いてください
-
+    words.stream()
+        .filter(s -> s.length() >= 5)
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -76,7 +84,9 @@ public class StreamPractice {
     List<Integer> nums = List.of(5, 1, 4, 2, 3);
 
     // 以下に回答コードを書いてください
-
+    nums.stream()
+        .sorted()
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -94,7 +104,9 @@ public class StreamPractice {
     List<Integer> dupNumbers = List.of(1, 2, 2, 3, 3, 3, 4);
 
     // 以下に回答コードを書いてください
-
+    dupNumbers.stream()
+        .distinct()
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -109,7 +121,9 @@ public class StreamPractice {
     List<String> languages = List.of("java", "python", "php");
 
     // 以下に回答コードを書いてください
-
+    Map<String, Integer> languageAndLengthMap = languages.stream()
+        .collect(Collectors.toMap(s -> s, String::length));
+    System.out.println(languageAndLengthMap);
 
     /*
       ==========================
@@ -124,7 +138,8 @@ public class StreamPractice {
     List<Integer> numbers2 = List.of(1, 2, 3, 4, 5);
 
     // 以下に回答コードを書いてください
-
+    int sum = numbers2.stream().reduce(0, Integer::sum);
+    System.out.println(sum);
 
     /*
       ==========================
@@ -139,7 +154,8 @@ public class StreamPractice {
     List<String> animals = List.of("dog", "cat", "bird");
 
     // 以下に回答コードを書いてください
-
+    boolean hasCat = animals.stream().anyMatch("cat"::equals);
+    System.out.println(hasCat);
 
     /*
       ==========================
@@ -154,7 +170,8 @@ public class StreamPractice {
     List<Integer> evenNumbers = List.of(2, 4, 6, 8);
 
     // 以下に回答コードを書いてください
-
+    boolean allEven = evenNumbers.stream().allMatch(n -> n % 2 == 0);
+    System.out.println(allEven);
 
     /*
       ==========================
@@ -169,7 +186,9 @@ public class StreamPractice {
     List<Integer> values = List.of(10, 20, 5, 40, 15);
 
     // 以下に回答コードを書いてください
-
+    int max = values.stream().max(Integer::compareTo).orElseThrow();
+    int min = values.stream().min(Integer::compareTo).orElseThrow();
+    System.out.println("最大値" + max + ", 最小値" + min);
 
     /*
       ==========================
@@ -199,7 +218,9 @@ public class StreamPractice {
     );
 
     // 以下に回答コードを書いてください
-
+    sentences.stream()
+        .flatMap(s -> Arrays.stream(s.split("\\s+")))
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -216,7 +237,9 @@ public class StreamPractice {
     List<String> words2 = List.of("apple", "banana", "pear", "peach", "plum", "grape");
 
     // 以下に回答コードを書いてください
-
+    Map<Integer, List<String>> grouped = words2.stream()
+        .collect(Collectors.groupingBy(String::length));
+    grouped.forEach((len, list) -> System.out.println(len + "文字: " + list));
 
     /*
       ==========================
@@ -234,7 +257,12 @@ public class StreamPractice {
         "charles");
 
     // 以下に回答コードを書いてください
-
+    names2.stream()
+        .filter(s -> s.length() >= 4)
+        .map(String::toUpperCase)
+        .sorted(Comparator.reverseOrder())
+        .limit(3)
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -249,7 +277,13 @@ public class StreamPractice {
     List<String> strNumbers = List.of("10", "x", "21", "004", "seven", "18");
 
     // 以下に回答コードを書いてください
-
+    int totalEven =
+        strNumbers.stream()
+            .filter(s -> s.matches("\\d+"))
+            .map(Integer::parseInt)
+            .filter(n -> n % 2 == 0)
+            .reduce(0, Integer::sum);
+    System.out.println(totalEven);
 
     /*
       ==========================
@@ -279,7 +313,13 @@ public class StreamPractice {
     );
 
     // 以下に回答コードを書いてください
-
+    csv.stream()
+        .flatMap(line -> Arrays.stream(line.split(",")))
+        .map(String::trim)
+        .filter(s -> s.length() >= 5)
+        .distinct()
+        .sorted()
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -302,7 +342,16 @@ public class StreamPractice {
     List<String> animals2 = List.of("Cat", "cow", "camel", "dog", "Deer", "duck", "ant", "Ape");
 
     // 以下に回答コードを書いてください
-
+    animals2.stream()
+        .map(String::toLowerCase)
+        .collect(Collectors.groupingBy(c -> c.charAt(0)))
+        .entrySet()
+        .stream()
+        .sorted(Comparator
+            .comparingInt((Map.Entry<Character, List<String>> e) -> e.getValue().size())
+            .reversed())
+        .map(e -> e.getKey() + ": " + e.getValue().size())
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -327,7 +376,17 @@ public class StreamPractice {
     );
 
     // 以下に回答コードを書いてください
-
+    people.stream()
+        .map(p -> Map.entry(
+            p.name,
+            p.scores.stream()
+                .mapToInt(Integer::intValue)
+                .average()
+                .orElse(0)))
+        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+        .limit(2)
+        .map(Map.Entry::getKey)
+        .forEach(System.out::println);
 
     /*
       ==========================
@@ -346,7 +405,13 @@ public class StreamPractice {
     List<Integer> basePrices = List.of(980, 1200, 2500, 510, 3000);
 
     // 以下に回答コードを書いてください
-
+    List<Integer> saleTotals =
+        basePrices.stream()
+            .map(p -> (int) (p * 0.9)) // 10%OFF
+            .map(p -> p + 200) // 送料加算
+            .filter(total -> total >= 1000)
+            .collect(Collectors.toList());
+    System.out.println(saleTotals);
 
     /*
       ==========================
@@ -368,7 +433,15 @@ public class StreamPractice {
         "super-long-handle-name");
 
     // 以下に回答コードを書いてください
-
+    List<String> profileUrls =
+        handles.stream()
+            .map(String::toLowerCase)
+            .map(String::trim)
+            .map(s -> s.replaceAll("[^a-z0-9]", "")) // 半角英数字以外を除去
+            .filter(s -> s.length() <= 20) // 20文字以内に絞る
+            .map(s -> "https://example.com/u/" + s)
+            .toList();
+    System.out.println(profileUrls);
 
     /*
       ==========================
@@ -389,7 +462,13 @@ public class StreamPractice {
         "Lord of the Rings");
 
     // 以下に回答コードを書いてください
-
-
+    List<String> hashtags =
+        movieTitles.stream()
+            .map(String::trim)
+            .map(s -> s.replaceAll("\\s+", "")) // スペース除去で1語化
+            .map(s -> "#" + s)
+            .filter(tag -> tag.length() <= 15)
+            .collect(Collectors.toList());
+    System.out.println(hashtags);
   }
 }
