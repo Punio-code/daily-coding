@@ -5,6 +5,8 @@ import java.util.List;
 public class StreamPractice {
 
   public static void main(String[] args) {
+
+
     // ==========================
     // 1問目: forEach の練習
     // 変数 names を使って、forEach で名前を1つずつ表示してください。
@@ -188,6 +190,7 @@ public class StreamPractice {
     // 出力結果:
     // fukuoka
     // nagoya
+    // osaka
     // sapporo
     // tokyo
     // ==========================
@@ -214,7 +217,7 @@ public class StreamPractice {
     // 例: ["Cat","cow","camel","dog","Deer","duck","ant","Ape"]
     // 出力結果（順序は件数の多い順）:
     // c: 3
-    // d: 2
+    // d: 3
     // a: 2
     // （※ "Deer" → "deer", "Ape" → "ape" のように小文字化して処理）
     // ==========================
@@ -261,8 +264,8 @@ public class StreamPractice {
     // 1. すべて小文字に変換する（map）
     // 2. 前後の空白を取り除く（map）
     // 3. 半角英数字以外（空白・記号・括弧など）はすべて削除する（map）
-    // 4. 先頭に "https://example.com/u/" を付けてプロフィールURLにする（map）
-    // 5. URLが20文字を超える場合は除外する（filter）
+    // 4. URLが20文字を超える場合は除外する（filter）
+    // 5. 先頭に "https://example.com/u/" を付けてプロフィールURLにする（map）
     // 最終的に profileUrls という List<String> 型のリスト変数にして、その中身の値を表示してください。
     // ==========================
     System.out.println("\n【19問目】SNSプロフィールURLメーカー");
