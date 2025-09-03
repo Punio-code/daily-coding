@@ -1,2 +1,2 @@
 rootProject.name = 'java-training'
-include 'sample'
+include 'exercises', 'solutions'
