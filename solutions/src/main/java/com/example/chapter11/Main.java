@@ -344,7 +344,7 @@ public class Main {
         n -> System.out.println("在庫あり(" + n + ")"),
         () -> System.out.println("在庫なし")
     );
-    
+
     stock2.ifPresentOrElse(
         n -> System.out.println("在庫あり(" + n + ")"),
         () -> System.out.println("在庫なし")
