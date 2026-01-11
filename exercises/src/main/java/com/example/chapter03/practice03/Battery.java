@@ -49,6 +49,4 @@ public class Battery {
     public String label() {
         return "バッテリー :" + this.percentage + "%";
     }
-
-    ;
 }
