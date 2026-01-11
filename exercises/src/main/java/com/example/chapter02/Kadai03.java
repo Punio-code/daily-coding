@@ -19,14 +19,18 @@ package com.example.chapter02;
 */
 public class Kadai03 {
 
-  public static void main(String[] args) {
-    int[] stocks = {5, 3, 2, 6, 5};
-    int total = 0;
+    public static void main(String[] args) {
+        int[] stocks = {5, 3, 2, 6, 5};
+        int total = 0;
+        // i <= array.lengthの場合、index数の範囲を１超えてしまう　indexの開始が0からのため
+        for (int i = 0; i < stocks.length; i++) {
+            //
+            total += stocks[i];
+        }
 
-    for (int i = 0; i <= stocks.length; i++) {
-      total =+ stocks[i];
+        System.out.println("在庫の合計: " + total);
     }
-
-    System.out.println("在庫の合計: " + total);
-  }
 }
+
+//PS C:\gitclone\java-training\exercises\src\main\java\com\example\chapter02> java .\Kadai03.java
+//在庫の合計: 21

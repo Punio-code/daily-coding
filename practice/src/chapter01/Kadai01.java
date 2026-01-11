@@ -1,4 +1,4 @@
-package com.example.chapter01;
+package chapter01;
 
 /*
   【問題01：合格判定（if文と論理演算子）】
@@ -15,24 +15,25 @@ package com.example.chapter01;
   ▼指示
   ・if文の条件式を修正し、期待される出力になるようにしてください。
   ・score と attendance の値は変更しないこと。
+
+  ▼修正ポイント
+  元のコードは if (score >= 60 || attendance >= 0.8) で「どちらか一方でも満たせば合格」になっていた。
+  正しくは AND（&&）を用いて if (score >= 60 && attendance >= 0.8) とし、「両方満たしたら合格」にする。
+  これにより score=75, attendance=0.7 では条件を満たさないため「不合格」になる。
 */
 public class Kadai01 {
 
-    public static void main(String[] args) {
-        int score = 75;
-        double attendance = 0.7;
+  public static void main(String[] args) {
+    int score = 75;
+    double attendance = 0.7;
 
-        String result;
-        //|| > &
-        if (score >= 60 && attendance >= 0.8) {
-            result = "合格";
-        } else {
-            result = "不合格";
-        }
-
-        System.out.println("判定結果: " + result);
+    String result;
+    if (score >= 60 && attendance >= 0.8) { // 修正: OR( || )ではなく AND( && )にする
+      result = "合格";
+    } else {
+      result = "不合格";
     }
-}
 
-//PS C:\gitclone\java-training\exercises\src\main\java\com\example\chapter01> java .\Kadai01.java
-//判定結果: 不合格
+    System.out.println("判定結果: " + result);
+  }
+}

@@ -26,9 +26,26 @@ package com.example.chapter02;
 */
 public class Kadai05 {
 
-  public static void main(String[] args) {
-    int[] numbers = {3, 7, 8, 9, 5};
+    public static void main(String[] args) {
+        int[] numbers = {3, 7, 8, 9, 5};
 
-    // ここに while文を書いて完成させる
-  }
+        int i = 0;
+        boolean found = false;
+
+        while (i < numbers.length) {
+            System.out.println(numbers[i]);
+
+            if (numbers[i] % 2 == 0) {
+                System.out.println("→ 最初の偶数は " + numbers[i] + " でした");
+                found = true;
+                break;
+            }
+
+            i++;
+        }
+
+        if (!found) {
+            System.out.println("→ 偶数は見つかりませんでした");
+        }
+    }
 }

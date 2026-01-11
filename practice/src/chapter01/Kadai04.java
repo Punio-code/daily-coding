@@ -1,4 +1,4 @@
-package com.example.chapter01;
+package chapter01;
 
 /*
   【問題04：おこづかいランク（if文 → 三項演算子に書き換え）】
@@ -17,19 +17,19 @@ package com.example.chapter01;
   ▼指示
   ・下の「if ～ else」の1箇所を、同じ意味になるよう 三項演算子 で書き換えてください。
   ・同時に、条件式も仕様通りになるように修正してください。（現在だと、1000円がAランクとして出力されてしまいます）
+
+  ▼修正ポイント
+  元のコードは if (amount > 1000) だったため、ちょうど1000円がAになってしまう境界バグがあった。
+  仕様では「1000円以上はS」なので「>= 1000」に直し、あわせて三項演算子で簡潔に記述する。
 */
 public class Kadai04 {
 
-    public static void main(String[] args) {
-        final int amount = 1000;
+  public static void main(String[] args) {
+    final int amount = 1000;
 
-        // 以下の条件式の間違いを正し、また三項演算子に書き換えてください。
-        String rank
-                = (amount >= 1000) ? "S" : "A";
+    // 修正：三項演算子にし、条件式を >= に変更して仕様通りにする。
+    String rank = (amount >= 1000) ? "S" : "A";
 
-        System.out.println("ランク: " + rank);
-    }
+    System.out.println("ランク: " + rank);
+  }
 }
-
-//PS C:\gitclone\java-training\exercises\src\main\java\com\example\chapter01> java kadai04.java
-//ランク: S

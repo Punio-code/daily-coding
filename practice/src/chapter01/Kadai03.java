@@ -1,4 +1,4 @@
-package com.example.chapter01;
+package chapter01;
 
 /*
   【問題03：スマホでゲーム開始できる？（if文のネスト）】
@@ -29,34 +29,39 @@ package com.example.chapter01;
 
   ▼指示
   ・「電池 → 充電器 → コンセント」の順で if をネストして判定し、期待される出力に修正してください。
+
+  ▼修正ポイント
+  元のコードは if (battery >= 30 || hasCharger || outletAvailable) となっており、
+  「どれか1つでも true ならプレイ開始」という誤った判定だった。
+  正しくは「まず電池を判定し、足りない場合だけ充電器→コンセントの順に条件分岐をネストして判定」する。
 */
 public class Kadai03 {
 
-    public static void main(String[] args) {
-        final int battery = 15; // 電池残量
-        final boolean hasCharger = true; // 充電器はあるか
-        final boolean outletAvailable = false; // コンセントは空いているか
+  public static void main(String[] args) {
+    final int battery = 15; // 電池残量
+    final boolean hasCharger = true; // 充電器はあるか
+    final boolean outletAvailable = false; // コンセントは空いているか
 
-        String message;
+    String message; // 出力するメッセージ
 
-        // 電池 → 充電器 → コンセント の順で判定
-        if (battery >= 30) {
-            message = "プレイ開始";
+    // 修正：段階的に if をネストして判定する
+    if (battery >= 30) {
+      message = "プレイ開始";
+    } else {
+      // 充電器はあるか
+      if (hasCharger) {
+        // 充電器はある → コンセントの空いているか
+        if (outletAvailable) {
+          message = "充電してからプレイOK";
         } else {
-            if (hasCharger) {
-                if (outletAvailable) {
-                    message = "充電してからプレイOK";
-                } else {
-                    message = "できません: コンセントが空いていません";
-                }
-            } else {
-                message = "できません: 充電器がありません";
-            }
+          message = "できません: コンセントが空いていません";
         }
-
-        System.out.println(message);
+      } else {
+        // 充電器がない
+        message = "できません: 充電器がありません";
+      }
     }
-}
 
-//PS C:\gitclone\java-training\exercises\src\main\java\com\example\chapter01> java kadai03.java
-//できません: コンセントが空いていません
+    System.out.println(message);
+  }
+}

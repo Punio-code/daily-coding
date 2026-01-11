@@ -1,5 +1,7 @@
 package com.example.chapter02;
 
+import java.util.OptionalInt;
+
 /*
   【問題02：平均点と合格者数を求める】
   これは、配列 scores の平均点を計算し、60点以上の合格者数を表示するプログラムです。
@@ -26,26 +28,47 @@ package com.example.chapter02;
 */
 public class Kadai02 {
 
-  public static void main(String[] args) {
-    int[] scores = {55, 70, -1, 90, 35, 80, 101}; // -1, 101: 無効
-    int sum = 0;          // 有効点数の合計
-    int passedCount = 0;  // 合格者数
-    int validCount = 0;   // 有効点数の件数
-    int invalidCount = 0; // 無効点数の件数
+    public static void main(String[] args) {
 
-    for (int s : scores) {
-      sum += s;
-      validCount++;
-      if (s >= 60) {
-        passedCount++;
-      }
+        int[] scores = {55, 70, -1, 90, 35, 80, 101}; // -1, 101: 無効
+        int sum = 0;          // 有効点数の合計
+        int passedCount = 0;  // 合格者数
+        int validCount = 0;   // 有効点数の件数
+        int invalidCount = 0; // 無効点数の件数
+
+        //ループ変数
+        //インデックス変数
+        for (int s : scores) {
+
+            //無効な値を検出して排除
+            if (s < 0 || 100 < s) {
+                //1イテレーションの際に無効の値を検出した場合、それ以降の処理をしてはいけないのでContinueする
+                invalidCount++;
+                continue;
+            }
+            sum += s;
+            validCount++;
+            if (s >= 60) {
+                passedCount++;
+            }
+        }
+        OptionalInt avg =
+                validCount == 0
+                        ? OptionalInt.empty()
+                        : OptionalInt.of(sum / validCount);
+
+        avg.ifPresentOrElse(
+                v -> System.out.println("平均: " + v),
+                () -> System.out.println("平均: 計算不能")
+        );
+        System.out.println("合格者数: " + passedCount);
+        System.out.println("有効な点数の数: " + validCount);
+        System.out.println("無効な点数の数: " + invalidCount);
     }
-
-    int avg = sum / scores.length;
-
-    System.out.println("平均: " + avg);
-    System.out.println("合格者数: " + passedCount);
-    System.out.println("有効な点数の数: " + validCount);
-    System.out.println("無効な点数の数: " + invalidCount);
-  }
 }
+
+//PS C:\gitclone\java-training\exercises\src\main\java\com\example\chapter02> java .\Kadai02.java
+//平均: 66
+//合格者数: 3
+//有効な点数の数: 5
+//無効な点数の数: 2

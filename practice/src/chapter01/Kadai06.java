@@ -1,4 +1,4 @@
-package com.example.chapter01;
+package chapter01;
 
 /*
   【問題06：信号の色で行動を表示（if文 → switch式に書き換え）】
@@ -19,24 +19,25 @@ package com.example.chapter01;
   ▼指示
   ・下の if ～ else の判定を switch式 に書き換えて、仕様通りの文字列を代入してください。
   ・if ～ else は使わないこと。switch文ではなく、switch式 を用いること。
+
+  ▼修正ポイント
+  if/else 連鎖をやめ、switch式 で分岐結果をそのまま代入する。
 */
 public class Kadai06 {
 
-    public static void main(String[] args) {
-        final String signal = "RED";
+  public static void main(String[] args) {
+    final String signal = "RED";
 
-        // 以下の if ～ else の判定を switch式 に書き換えてください。
-        String action = switch (signal) {
-            case "GREEN" -> "進む";
-            case "YELLOW" -> "注意して進む";
-            case "RED" -> "止まる";
-            default -> "不明";
-        };
+    // 修正：switch「式」で action を代入する。
+    String action = switch (signal) {
+      case "GREEN"  -> "進む";
+      case "YELLOW" -> "注意して進む";
+      case "RED"    -> "止まる";
+      default       -> "不明";
+    };
 
-        //breakを置く必要はない
-
-        System.out.println("行動: " + action);
-    }
+    System.out.println("行動: " + action);
+  }
 }
 
 

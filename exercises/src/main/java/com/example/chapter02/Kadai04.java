@@ -1,5 +1,7 @@
 package com.example.chapter02;
 
+import java.util.OptionalInt;
+
 /*
   【問題04：ゲームスコアの合計と平均】
   あなたはゲームで5回プレイしました。
@@ -17,9 +19,20 @@ package com.example.chapter02;
 */
 public class Kadai04 {
 
-  public static void main(String[] args) {
-    int[] scores = {100, 80, 90, 70, 90};
+    public static void main(String[] args) {
+        int[] scores = {100, 80, 90, 70, 90};
+        int validCount = 0;
+        // ここに処理を書いて完成させる
+        int sum = 0;
+        for (int i : scores) {
+            sum += i;
+            System.out.println(sum);
+            validCount++;
+        }
+        System.out.println("合計: " + sum);
+        OptionalInt avg = validCount == 0 ? OptionalInt.empty() : OptionalInt.of(sum / validCount);
+        avg.ifPresentOrElse(v -> System.out.println("平均: " + v), () -> System.out.println("平均: 計算不能"));
 
-    // ここに処理を書いて完成させる
-  }
+
+    }
 }

@@ -27,34 +27,37 @@ package com.example.chapter01;
 */
 public class Kadai02 {
 
-  public static void main(String[] args) {
-    final int baseFare = 520;     // 基本運賃（円）
-    final int age = 65;           // 年齢
-    final boolean holiday = true; // 休日フラグ
+    public static void main(String[] args) {
+        final int baseFare = 520;     // 基本運賃（円）
+        final int age = 65;           // 年齢
+        final boolean holiday = true; // 休日フラグ
 
-    int fare; // 計算後の運賃（円）
+        int fare; // 計算後の運賃（円）
 
-    // 年齢別の運賃計算
-    if (age <= 5) {
-      fare = 0;
-    } else if (age >= 13) {
-      fare = baseFare;
-    } else if (age >= 6) {
-      fare = (int) (baseFare * 0.5);
-    } else if (age >= 65) {
-      fare = (int) (baseFare * 0.8);
-    } else {
-      fare = baseFare;
+        // 年齢別の運賃計算（条件の優先順位）
+        if (age <= 5) {
+            fare = 0;
+        } else if (age >= 65) {
+            fare = (int) (baseFare * 0.8); // シニア 20% 引き
+        } else if (age >= 13) {
+            fare = baseFare;              // 大人
+        } else if (age >= 6) {
+            fare = (int) (baseFare * 0.5); // 小児
+        } else {
+            fare = baseFare;
+        }
+
+        // 休日割引（無料は割引しない）
+        if (holiday && fare > 0) {
+            fare = (int) (fare * 0.9); // 10% 引き
+        }
+
+        // 最後に10円未満を切り捨てる（例：468 → 460）
+        fare = (fare / 10) * 10;
+
+        System.out.println("運賃: " + fare + "円");
     }
-
-    // 休日割引（無料は割引しない）
-    if (holiday && fare > 0) {
-      fare = (int) (fare * 0.9); // 10% 引き
-    }
-
-    // 最後に10円未満を切り捨てる（例：468 → 460）
-    fare = (fare / 10) * 10;
-
-    System.out.println("運賃: " + fare + "円");
-  }
 }
+
+//PS C:\gitclone\java-training\exercises\src\main\java\com\example\chapter01> java kadai02.java
+//運賃: 370円

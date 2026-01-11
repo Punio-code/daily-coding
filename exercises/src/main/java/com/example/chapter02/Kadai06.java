@@ -21,9 +21,19 @@ package com.example.chapter02;
 */
 public class Kadai06 {
 
-  public static void main(String[] args) {
-    String[] fruits = {"りんご:5", "バナナ:2", "みかん:10", "いちご:1"};
+    public static void main(String[] args) {
+        String[] fruits = {"りんご:5", "バナナ:2", "みかん:10", "いちご:1"};
 
-    // ここに拡張for文を書いて完成させる
-  }
+        // ここに拡張for文を書いて完成させる
+        for (String fruit : fruits) {
+            // parts [0] :parts[1] =  fruit : number
+            String[] parts = fruit.split(":");
+            String name = parts[0];
+            int stock = Integer.parseInt(parts[1]);
+            //
+            if (stock <= 3) {
+                System.out.println("在庫わずか: " + name + "（" + stock + "個）");
+            }
+        }
+    }
 }

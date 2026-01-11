@@ -25,11 +25,17 @@ package com.example.chapter02;
 */
 public class Kadai07 {
 
-  public static void main(String[] args) {
-    int price = 200;  // 1杯あたりの価格
-    int total = 0;    // 合計金額
-    int count = 0;    // 注文した杯数
+    public static void main(String[] args) {
+        int price = 200;  // 1杯あたりの価格
+        int total = 0;    // 合計金額
+        int count = 0;    // 注文した杯数
 
-    // ここに do-while文を書いて完成させる
-  }
+        // ここに do-while文を書いて完成させる
+        do {
+            count++;
+            total += price;
+            System.out.println("コーヒーを注文しました（" + count + "杯目）");
+        } while (total < 1000);
+        System.out.println("→ お会計に進みます");
+    }
 }

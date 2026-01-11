@@ -17,15 +17,26 @@ package com.example.chapter02;
 */
 public class Kadai01 {
 
-  public static void main(String[] args) {
-    double[] temps = {18.5, 20.0, 19.2, 21.0, 17.8};
-    double max = 0;
+    public static void main(String[] args) {
+        double[] temps = {18.5, 20.0, 19.2, 21.0, 17.8};
+        double max = temps[0];
+        double mathMax = temps[0];
 
-    for (int i = 0; i < temps.length; i++) {
-      if (max > temps[i]) {
-        max = temps[i];
-      }
+        for (int i = 0; i < temps.length; i++) {
+            if (max < temps[i]) {
+                max = temps[i];
+            }
+        }
+
+        for (int i = 1; i < temps.length; i++) {
+            mathMax = Math.max(max, temps[i]);
+        }
+
+        System.out.println("最高気温: " + max + "℃");
+        System.out.println("最高気温: " + mathMax + "℃");
     }
-    System.out.println("最高気温: " + max + "℃");
-  }
 }
+
+//PS C:\gitclone\java-training\exercises\src\main\java\com\example\chapter02> java .\Kadai01.java
+//最高気温: 21.0℃
+//最高気温: 21.0℃

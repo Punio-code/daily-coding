@@ -9,7 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/answer" />
+            <option value="$PROJECT_DIR$/exercises" />
+            <option value="$PROJECT_DIR$/solutions" />
           </set>
         </option>
       </GradleProjectSettings>
