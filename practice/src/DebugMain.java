@@ -1,11 +1,16 @@
 public class DebugMain {
-    public static void main(String[] args) {
-
-    }
 
     // DebugPerson型のインスタンスを生成して返すメソッド
-    public DebugPerson createPerson(String name, String hobby) {
-        DebugPerson debugPerson = new DebugPerson(hobby, name);
+    public static DebugPerson createPerson(String name, String hobby) {
+        DebugPerson debugPerson = new DebugPerson(name, hobby);
+        //throw new RuntimeException("なんとなく");
         return debugPerson;
+    }
+
+    public static void main(String[] args) {
+        DebugPerson debugPerson = createPerson("Taro", "soccer");
+
+        debugPerson.introduceMyself();
+
     }
 }
