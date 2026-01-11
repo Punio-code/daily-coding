@@ -6,16 +6,18 @@ package com.example.chapter03.practice03;
  */
 public class Battery {
 
-  /** バッテリー残量（0〜100%） */
-  private int percentage;
+    /**
+     * バッテリー残量（0〜100%）
+     */
+    private int percentage;
 
-  /**
-   * コンストラクタ。
-   * 初期残量を指定してバッテリーを作ります。
-   *
-   * @param initial 初期残量（%）
-   */
-  public Battery(int initial) {
+    /**
+     * コンストラクタ。
+     * 初期残量を指定してバッテリーを作ります。
+     *
+     * @param initial 初期残量（%）
+     */
+    public Battery(int initial) {
     /*
         ガード処理を実装してください。
 
@@ -26,6 +28,12 @@ public class Battery {
           フィールドに代入することを指します。
           例）0 未満は 0、100 超えは 100、それ以外はそのまま代入する
      */
-    this.percentage = initial; // ここを修正する
-  }
+        if (initial < 0) {
+            this.percentage = 0;
+        } else if (initial > 100) {
+            this.percentage = 100;
+        } else {
+            this.percentage.initial
+        }
+    }
 }
