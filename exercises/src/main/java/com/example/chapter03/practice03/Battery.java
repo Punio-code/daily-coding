@@ -15,9 +15,10 @@ public class Battery {
      * コンストラクタ。
      * 初期残量を指定してバッテリーを作ります。
      *
-     * @param initial 初期残量（%）
+     * @param value 初期残量（%）
      */
-    public Battery(int initial) {
+    public Battery(int value) {
+
     /*
         ガード処理を実装してください。
 
@@ -28,12 +29,26 @@ public class Battery {
           フィールドに代入することを指します。
           例）0 未満は 0、100 超えは 100、それ以外はそのまま代入する
      */
-        if (initial < 0) {
+        setPercentage(value);
+    }
+
+    private void setPercentage(int value) {
+        if (value < 0) {
             this.percentage = 0;
-        } else if (initial > 100) {
+        } else if (value > 100) {
             this.percentage = 100;
         } else {
-            this.percentage.initial
+            this.percentage = value;
         }
     }
+
+    public void charge(int b) {
+        setPercentage(this.percentage + b);
+    }
+
+    public String label() {
+        return "バッテリー :" + this.percentage + "%";
+    }
+
+    ;
 }
