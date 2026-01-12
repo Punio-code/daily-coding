@@ -1,4 +1,4 @@
-package com.example.chapter04.practice01;
+package com.example.chapter04;
 
 /**
  * カレンダーの予定（Event）を表すクラス。

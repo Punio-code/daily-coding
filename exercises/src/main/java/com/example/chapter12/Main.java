@@ -1,4 +1,4 @@
-package com.example.chapter12.practice01;
+package com.example.chapter12;
 
 /**
  * 【問題01：点数を Grade Enum によって評価しよう】

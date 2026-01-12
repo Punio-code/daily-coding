@@ -1,4 +1,4 @@
-package com.example.chapter12.practice01;
+package com.example.chapter12;
 
 class GradeService {
   public static String evaluate(int score) {
