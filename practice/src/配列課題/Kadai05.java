@@ -39,23 +39,23 @@ package 配列課題;
 */
 public class Kadai05 {
 
-  public static void main(String[] args) {
-    int[] numbers = {3, 7, 8, 9, 5};
+    public static void main(String[] args) {
+        int[] numbers = {3, 7, 8, 9, 5};
 
-    // ここに while文を書いて完成させる
-    int i = 0;
-    while (i < numbers.length) {
-      System.out.println(numbers[i]);
+        // ここに while文を書いて完成させる
+        int i = 0;
+        while (i < numbers.length) {
+            System.out.println(numbers[i]);
 
-      if (numbers[i] % 2 == 0) {
-        System.out.println("→ 最初の偶数は " + numbers[i] + " でした");
-        return; // 見つかったら即終了
-      }
+            if (numbers[i] % 2 == 0) {
+                System.out.println("→ 最初の偶数は " + numbers[i] + " でした");
+                return; // 見つかったら即終了
+            }
 
-      i++;
+            i++;
+        }
+
+        // 偶数が最後まで見つからなかった場合のみここが実行される
+        System.out.println("→ 偶数は見つかりませんでした");
     }
-
-    // 偶数が最後まで見つからなかった場合のみここが実行される
-    System.out.println("→ 偶数は見つかりませんでした");
-  }
 }

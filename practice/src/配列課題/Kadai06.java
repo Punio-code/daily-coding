@@ -32,20 +32,20 @@ package 配列課題;
 */
 public class Kadai06 {
 
-  public static void main(String[] args) {
-    String[] fruits = {"りんご:5", "バナナ:2", "みかん:10", "いちご:1"};
+    public static void main(String[] args) {
+        String[] fruits = {"りんご:5", "バナナ:2", "みかん:10", "いちご:1"};
 
-    // 拡張for文で配列を走査
-    for (String fruit : fruits) {
-      // 「:」で分割して果物名と在庫数を取り出す
-      String[] parts = fruit.split(":");
-      String name = parts[0];
-      int stock = Integer.parseInt(parts[1]);
+        // 拡張for文で配列を走査
+        for (String fruit : fruits) {
+            // 「:」で分割して果物名と在庫数を取り出す
+            String[] parts = fruit.split(":");
+            String name = parts[0];
+            int stock = Integer.parseInt(parts[1]);
 
-      // 在庫が3以下なら表示
-      if (stock <= 3) {
-        System.out.println("在庫わずか: " + name + "（" + stock + "個）");
-      }
+            // 在庫が3以下なら表示
+            if (stock <= 3) {
+                System.out.println("在庫わずか: " + name + "（" + stock + "個）");
+            }
+        }
     }
-  }
 }

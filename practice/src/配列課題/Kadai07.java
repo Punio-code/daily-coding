@@ -38,18 +38,18 @@ package 配列課題;
 */
 public class Kadai07 {
 
-  public static void main(String[] args) {
-    int price = 200;  // 1杯あたりの価格
-    int total = 0;    // 合計金額
-    int count = 0;    // 注文した杯数
+    public static void main(String[] args) {
+        int price = 200;  // 1杯あたりの価格
+        int total = 0;    // 合計金額
+        int count = 0;    // 注文した杯数
 
-    // ここに do-while文を書いて完成させる
-    do {
-      count++;                // 注文した杯数をカウント
-      total += price;         // 合計金額を加算
-      System.out.println("コーヒーを注文しました（" + count + "杯目）");
-    } while (total < 1000);   // 1000円以上になったら終了（つまり、1000円未満の場合は繰り返す）
+        // ここに do-while文を書いて完成させる
+        do {
+            count++;                // 注文した杯数をカウント
+            total += price;         // 合計金額を加算
+            System.out.println("コーヒーを注文しました（" + count + "杯目）");
+        } while (total < 1000);   // 1000円以上になったら終了（つまり、1000円未満の場合は繰り返す）
 
-    System.out.println("→ お会計に進みます");
-  }
+        System.out.println("→ お会計に進みます");
+    }
 }

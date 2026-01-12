@@ -24,19 +24,19 @@ package 配列課題;
 */
 public class Kadai04 {
 
-  public static void main(String[] args) {
-    int[] scores = {100, 80, 90, 70, 90};
+    public static void main(String[] args) {
+        int[] scores = {100, 80, 90, 70, 90};
 
-    // ここに処理を書いて完成させる
-    int sum = 0;
-    for (int i = 0; i < scores.length; i++) {
-      sum += scores[i]; // 加算代入で合計を累積
+        // ここに処理を書いて完成させる
+        int sum = 0;
+        for (int i = 0; i < scores.length; i++) {
+            sum += scores[i]; // 加算代入で合計を累積
+        }
+
+        // 平均は合計を要素数で割る
+        int avg = sum / scores.length;
+
+        System.out.println("合計: " + sum);
+        System.out.println("平均: " + avg);
     }
-
-    // 平均は合計を要素数で割る
-    int avg = sum / scores.length;
-
-    System.out.println("合計: " + sum);
-    System.out.println("平均: " + avg);
-  }
 }

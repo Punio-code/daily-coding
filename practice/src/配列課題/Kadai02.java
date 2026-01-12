@@ -35,33 +35,33 @@ package 配列課題;
 */
 public class Kadai02 {
 
-  public static void main(String[] args) {
-    int[] scores = {55, 70, -1, 90, 35, 80, 101}; // -1, 101: 無効
-    int sum = 0;          // 有効点数の合計
-    int passedCount = 0;  // 合格者数
-    int validCount = 0;   // 有効点数の件数
-    int invalidCount = 0; // 無効点数の件数
+    public static void main(String[] args) {
+        int[] scores = {55, 70, -1, 90, 35, 80, 101}; // -1, 101: 無効
+        int sum = 0;          // 有効点数の合計
+        int passedCount = 0;  // 合格者数
+        int validCount = 0;   // 有効点数の件数
+        int invalidCount = 0; // 無効点数の件数
 
-    for (int s : scores) {
-      // 修正: 無効な値であるかをチェックする
-      if (s < 0 || s > 100) {
-        invalidCount++;
-        continue; // 無効な値はスキップ
-      }
+        for (int s : scores) {
+            // 修正: 無効な値であるかをチェックする
+            if (s < 0 || s > 100) {
+                invalidCount++;
+                continue; // 無効な値はスキップ
+            }
 
-      sum += s;
-      validCount++;
+            sum += s;
+            validCount++;
 
-      if (s >= 60) {
-        passedCount++;
-      }
+            if (s >= 60) {
+                passedCount++;
+            }
+        }
+
+        int avg = sum / validCount; // 修正: 平均は有効点数で割る
+
+        System.out.println("平均: " + avg);
+        System.out.println("合格者数: " + passedCount);
+        System.out.println("有効な点数の数: " + validCount);
+        System.out.println("無効な点数の数: " + invalidCount);
     }
-
-    int avg = sum / validCount; // 修正: 平均は有効点数で割る
-
-    System.out.println("平均: " + avg);
-    System.out.println("合格者数: " + passedCount);
-    System.out.println("有効な点数の数: " + validCount);
-    System.out.println("無効な点数の数: " + invalidCount);
-  }
 }

@@ -1,7 +1,7 @@
 public class TestOverload {
 
 
-    private String message;
+    private final String message;
 
     // ｺﾝｽﾄﾗｸﾀにおいてもｵｰﾊﾞｰﾛｰﾄﾞはせいりつ
     public TestOverload() {

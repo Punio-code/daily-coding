@@ -21,15 +21,15 @@ package 配列課題;
 */
 public class Kadai01 {
 
-  public static void main(String[] args) {
-    double[] temps = {18.5, 20.0, 19.2, 21.0, 17.8};
-    double max = 0;
+    public static void main(String[] args) {
+        double[] temps = {18.5, 20.0, 19.2, 21.0, 17.8};
+        double max = 0;
 
-    for (int i = 0; i < temps.length; i++) {
-      if (max < temps[i]) { // 修正: 「より大きければ更新」に条件を直す
-        max = temps[i];
-      }
+        for (int i = 0; i < temps.length; i++) {
+            if (max < temps[i]) { // 修正: 「より大きければ更新」に条件を直す
+                max = temps[i];
+            }
+        }
+        System.out.println("最高気温: " + max + "℃");
     }
-    System.out.println("最高気温: " + max + "℃");
-  }
 }

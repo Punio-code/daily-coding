@@ -28,15 +28,15 @@ package 配列課題;
 */
 public class Kadai03 {
 
-  public static void main(String[] args) {
-    int[] stocks = {5, 3, 2, 6, 5};
-    int total = 0;
+    public static void main(String[] args) {
+        int[] stocks = {5, 3, 2, 6, 5};
+        int total = 0;
 
-    // 修正1: ループ条件を < にする（範囲外アクセス防止）
-    for (int i = 0; i < stocks.length; i++) {
-      total += stocks[i]; // 修正2: total =+ stocks[i] → total += stocks[i] にする
+        // 修正1: ループ条件を < にする（範囲外アクセス防止）
+        for (int i = 0; i < stocks.length; i++) {
+            total += stocks[i]; // 修正2: total =+ stocks[i] → total += stocks[i] にする
+        }
+
+        System.out.println("在庫の合計: " + total);
     }
-
-    System.out.println("在庫の合計: " + total);
-  }
 }
