@@ -16,6 +16,13 @@ public class PizzaBox {
         setSlices(initialSlices);
     }
 
+    /*
+      コンストラクタ 終わり
+     */
+
+    /**
+     * Setter。
+     */
     private void setSlices(int value) {
         if (value < 0) {
             this.slices = 0;
@@ -24,5 +31,22 @@ public class PizzaBox {
         } else {
             this.slices = value;
         }
+    }
+
+
+    //メソッドの仕様：count（0 以上）だけスライスを減らす。結果は 0 未満にならないように 0 で止める。
+    //count < 0 が来た場合は何もしなくてよい。
+    public void eat(int count) {
+        if (count < 0) {
+            return;
+        }
+        setSlices(this.slices - count);
+    }
+
+    /**
+     * @return 「残りX切れ」
+     */
+    public String label() {
+        return "残り: " + this.slices + "切れ";
     }
 }
