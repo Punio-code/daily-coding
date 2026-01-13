@@ -15,5 +15,10 @@ public class LocalVariableExample {
         System.out.println(text);
 
         String name = null;
+        String emptyString = "";
+
+        //両者は全く違う。前者は値が存在しないという事であり　後者は値は存在するが、中身がゼロである
+        System.out.println(name);
+        System.out.println(emptyString);
     }
 }
