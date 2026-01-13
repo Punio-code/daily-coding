@@ -22,33 +22,29 @@ public class Event {
     private static final String DEFAULT_LOCATION = "オンライン";
 
     /**
+     * 作成された予定（Event）の総数
+     */
+    private static int totalEvents = 0;
+    /**
      * タイトル（例: 相談）
      */
-    public String title;
-
+    private String title;
     /**
      * 所要時間（分）
      */
-    public int minutes;
-
+    private int minutes;
     /**
      * 場所（例: オンライン）
      */
-    public String location;
-
-    /**
-     * 作成された予定（Event）の総数
-     */
-    static int totalEvents = 0;
+    private String location;
 
     /**
      * コンストラクタ。
      * デフォルトの予定を作成する。
      */
     public Event() {
-        this.title = DEFAULT_TITLE;
-        this.minutes = DEFAULT_MINUTES;
-        this.location = DEFAULT_LOCATION;
+        this(DEFAULT_TITLE, DEFAULT_MINUTES, DEFAULT_LOCATION);
+
     }
 
     /**
@@ -59,9 +55,8 @@ public class Event {
      * @param title タイトル
      */
     public Event(String title) {
-        this.title = title;
-        this.minutes = DEFAULT_MINUTES;
-        this.location = DEFAULT_LOCATION;
+        this(title, DEFAULT_MINUTES, DEFAULT_LOCATION);
+
     }
 
     /**
@@ -74,9 +69,7 @@ public class Event {
      */
     public Event(String title, int minutes) {
         // 実装する。
-        this.title = title;
-        this.minutes = minutes;
-        this.location = DEFAULT_LOCATION;
+        this(title, minutes, DEFAULT_LOCATION);
     }
 
     /**
@@ -91,47 +84,7 @@ public class Event {
         this.title = title;
         this.minutes = minutes;
         this.location = location;
-    }
-
-    /**
-     * 所要時間を 15分 加算する。
-     */
-    public void addMinutes() {
-        // 実装する。
-        int nextMinutes = this.minutes + 15;
-        if (nextMinutes > 59) {
-            nextMinutes = 59;
-        } else if (nextMinutes < 0) {
-            nextMinutes = 0;
-        }
-        this.minutes = nextMinutes;
-    }
-
-    /**
-     * 所要時間を 引数に与えられた値（分） 加算する。
-     *
-     * @param minutes 所要時間
-     */
-    public void addMinutes(int minutes) {
-        // 実装する。
-        int nextMinutes = this.minutes + minutes;
-        if (nextMinutes > 59) {
-            nextMinutes = 59;
-        } else if (nextMinutes < 0) {
-            nextMinutes = 0;
-        }
-        this.minutes = nextMinutes;
-    }
-    }
-
-    /**
-     * 表示用の文字列を取得する。
-     * （例: "予定: 予定のタイトル, 所要時間: 45分, 場所: オンライン"）
-     *
-     * @return 表示用の文字列
-     */
-    public String label() {
-        return "予定"; // ← 不具合
+        totalEvents++;
     }
 
     /**
@@ -142,4 +95,39 @@ public class Event {
     public static int getTotalEvents() {
         return totalEvents;
     }
+
+    /**
+     * 所要時間を 15分 加算する。
+     */
+    public void addMinutes() {
+        // 実装する。
+        addMinutes(15);
+    }
+
+    /**
+     * 所要時間を 引数に与えられた値（分） 加算する。
+     *
+     * @param minutes 所要時間
+     */
+    public void addMinutes(int minutes) {
+        // 実装する。
+        int nextMinutes = this.minutes + minutes;
+        if (nextMinutes > 60) {
+            nextMinutes = 60;
+        } else if (nextMinutes < 0) {
+            nextMinutes = 0;
+        }
+        this.minutes = nextMinutes;
+    }
+
+    /**
+     * 表示用の文字列を取得する。
+     * （例: "予定: 予定のタイトル, 所要時間: 45分, 場所: オンライン"）
+     *
+     * @return 表示用の文字列
+     */
+    public String label() {
+        return String.format("予定: %s, 所要時間: %d分, 場所: %s", title, minutes, location);
+    }
+
 }
