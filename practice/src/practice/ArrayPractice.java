@@ -1,3 +1,5 @@
+package practice;
+
 public class ArrayPractice {
     public static void main(String[] args) {
         String[] names; // declare array

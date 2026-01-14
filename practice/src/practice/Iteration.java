@@ -1,3 +1,5 @@
+package practice;
+
 public class Iteration {
     public static void main(String[] args) {
         System.out.println("while 文章の練習");

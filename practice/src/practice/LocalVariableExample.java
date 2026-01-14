@@ -1,3 +1,5 @@
+package practice;
+
 public class LocalVariableExample {
     public static void main(String[] args) {
         int x = 5;

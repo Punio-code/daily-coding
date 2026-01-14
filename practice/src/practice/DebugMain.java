@@ -1,3 +1,5 @@
+package practice;
+
 public class DebugMain {
 
     // DebugPerson型のインスタンスを生成して返すメソッド
