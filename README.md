@@ -1,3 +1,6 @@
+# 出典
+このリポジトリは、[stra24/java-training](https://github.com/stra24/java-training) の課題に対する私の解答コードを管理するものです。
+
 # Java課題リポジトリ
 
 このリポジトリは、**Java 学習用の課題プロジェクト**です。  
