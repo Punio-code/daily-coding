@@ -1,17 +1,14 @@
 package com.example.chapter07.practice01;
 
-/**
- * 猫クラス。
- */
-public class Cat implements Speakable {
+public class Lion implements Speakable {
 
     @Override
     public String speak() {
-        return "ニャー!";
+        return "ガオー！";
     }
 
     @Override
     public String displayName() {
-        return "猫";
+        return "ライオン";
     }
 }

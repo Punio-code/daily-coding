@@ -5,12 +5,13 @@ package com.example.chapter07.practice01;
  */
 public class Dog implements Speakable {
 
-  public String sound() {
-    return "ワン！";
-  }
+    @Override
+    public String speak() {
+        return "ワン！";
+    }
 
-  @Override
-  public String displayName() {
-    return "犬";
-  }
+    @Override
+    public String displayName() {
+        return "犬";
+    }
 }
