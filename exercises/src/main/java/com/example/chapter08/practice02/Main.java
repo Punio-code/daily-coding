@@ -1,4 +1,5 @@
 package com.example.chapter08.practice02;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,10 +13,10 @@ import java.util.Map;
  * (4)未登録メニューの価格取得では既定値を使って表示する。
  * (5)すべての価格を税込10%に一括変換したあと、合計金額を表示する。
  * (6)最後にメニューを全消去する。
- *
+ * <p>
  * しかし、今のコードには不具合・未実装が含まれており、期待される出力がされていません。
  * 下の「▼指示」に従って修正し、期待される出力結果になるようにしてください。
- *
+ * <p>
  * ▼現在の出力（このまま実行した場合）
  * メニュー（税抜・初期）: 5件
  * ---- 追加／更新（税抜） ----
@@ -26,165 +27,135 @@ import java.util.Map;
  * 税込合計: 1550円
  * ---- 片付け（全消去） ----
  * メニュー件数: 5件
- *
+ * <p>
  * ▼期待される出力（正しく修正できた場合の例）
  * メニュー（税抜・初期）: 5件
- *  - カレー: 350円
- *  - ラーメン: 420円
- *  - うどん: 305円
- *  - サラダ: 155円
- *  - パン: 180円
+ * - カレー: 350円
+ * - ラーメン: 420円
+ * - うどん: 305円
+ * - サラダ: 155円
+ * - パン: 180円
  * ---- 追加／更新（税抜） ----
  * メニュー（税抜・追加/更新後）: 6件
- *  - カレー: 360円
- *  - ラーメン: 420円
- *  - うどん: 305円
- *  - サラダ: 155円
- *  - パン: 180円
- *  - からあげ丼: 500円
+ * - カレー: 360円
+ * - ラーメン: 420円
+ * - うどん: 305円
+ * - サラダ: 155円
+ * - パン: 180円
+ * - からあげ丼: 500円
  * 味噌汁の価格（未登録時は0円で表示）: 0円
  * ---- 税込（10%）へ一括変換 ----
  * メニュー（税込）: 6件
- *  - カレー: 396円
- *  - ラーメン: 462円
- *  - うどん: 336円
- *  - サラダ: 171円
- *  - パン: 198円
- *  - からあげ丼: 550円
+ * - カレー: 396円
+ * - ラーメン: 462円
+ * - うどん: 336円
+ * - サラダ: 171円
+ * - パン: 198円
+ * - からあげ丼: 550円
  * 税込合計: 2113円
  * ---- 片付け（全消去） ----
  * メニュー件数: 0件
- *
+ * <p>
  * ▼指示
  * ・期待する出力結果になるように、実装を修正してください。
- *
+ * <p>
  * ▼ヒント
  * ・(2) 一覧出力が不足している。
- *       entrySet() を for-each で回し、キーと値を「 - 名: 金額円」で表示。
- *       使用候補：map.entrySet(), Map.Entry#getKey, Map.Entry#getValue
+ * entrySet() を for-each で回し、キーと値を「 - 名: 金額円」で表示。
+ * 使用候補：map.entrySet(), Map.Entry#getKey, Map.Entry#getValue
  * ・(3) 更新/追加が不足している。
- *       既存判定に containsKey(name)、
- *       既存の更新は replace(name, price) または put(name, price)、
- *       新規追加は put(name, price) を使う。
+ * 既存判定に containsKey(name)、
+ * 既存の更新は replace(name, price) または put(name, price)、
+ * 新規追加は put(name, price) を使う。
  * ・(4) 未登録メニューの取得で null 表示になる。
- *       getOrDefault("味噌汁", 0) を使って 0 を既定値にする。
+ * getOrDefault("味噌汁", 0) を使って 0 を既定値にする。
  * ・(5) 税込変換が切り捨てになっている。
- *       replaceAll((k,v) -> (int)Math.round(v * 1.1)) で一括変換。
- *       合計は values() を取り出して合算。
+ * replaceAll((k,v) -> (int)Math.round(v * 1.1)) で一括変換。
+ * 合計は values() を取り出して合算。
  * ・(6) 全消去が未実装。
- *       clear() を呼び出して要素をすべて削除する。
- *
+ * clear() を呼び出して要素をすべて削除する。
+ * <p>
  * ▼ねらい（学習項目）
  * ・Map の基本操作を一通り体験：put / get / containsKey / getOrDefault / replace / replaceAll / values / entrySet / size / clear
  * ・「更新」と「新規追加」を使い分けることができる。
  */
 public class Main {
-  public static void main(String[] args) {
-    // 追加順で出力したいので LinkedHashMap を使用（Map の実装は自由に差し替え可）
-    Map<String, Integer> menu = new LinkedHashMap<>();
+    public static void main(String[] args) {
+        Map<String, Integer> menu = new LinkedHashMap<>();
 
-    // (1)初期メニューを登録する。
-    addInitialMenu(menu);
+        addInitialMenu(menu);
+        printMenu("メニュー（税抜・初期）", menu);
 
-    // (2)初期メニューの一覧を出力する。
-    printMenu("メニュー（税抜・初期）", menu);
+        addOrUpdate(menu, "カレー", 360);
+        addOrUpdate(menu, "からあげ丼", 500);
 
-    // (3)既存メニューの価格を更新し、新メニューを追加する。
-    // カレーを360円に更新し、からあげ丼を500円で新規追加する。
-    addOrUpdate(menu, "カレー", 360);
-    addOrUpdate(menu, "からあげ丼", 500);
+        System.out.println("---- 追加／更新（税抜） ----");
+        printMenu("メニュー（税抜・追加/更新後）", menu);
 
-    System.out.println("---- 追加／更新（税抜） ----");
-    printMenu("メニュー（税抜・追加/更新後）", menu);
+        // (4) 指示通り getOrDefault を使用。null を防ぎ、存在しない場合は 0 を返します。
+        System.out.println("味噌汁の価格（未登録時は0円で表示）: " + menu.getOrDefault("味噌汁", 0) + "円");
 
-    // (4)未登録メニューの価格取得では既定値を使って表示する。
-    // 本来は未登録の「味噌汁」を 0円 で表示したい
-    System.out.println("味噌汁の価格（未登録時は0円で表示）: " + menu.get("味噌汁") + "円");
+        System.out.println("---- 税込（10%）へ一括変換 ----");
+        toTaxIncluded(menu);
+        printMenu("メニュー（税込）", menu);
+        System.out.println("税込合計: " + sum(menu) + "円");
 
-    // (5)すべての価格を税込10%に一括変換したあと、合計金額を表示する。
-    System.out.println("---- 税込（10%）へ一括変換 ----");
-    toTaxIncluded(menu);
-    printMenu("メニュー（税込）", menu);
-    System.out.println("税込合計: " + sum(menu) + "円");
-
-    // (6)最後にメニューを全消去する。
-    System.out.println("---- 片付け（全消去） ----");
-    clearAllMenu(menu);
-    System.out.println("メニュー件数: " + menu.size() + "件");
-  }
-
-  /**
-   * 初期メニュー（税抜）を登録する。
-   *
-   * @param menu キー：メニュー名, 値：価格（税抜）のマップ
-   */
-  private static void addInitialMenu(Map<String, Integer> menu) {
-    menu.put("カレー", 350);
-    menu.put("ラーメン", 420);
-    menu.put("うどん", 305);
-    menu.put("サラダ", 155);
-    menu.put("パン", 180);
-  }
-
-  /**
-   * メニューの件数と、各メニューのメニュー名・価格を表示する。
-   *
-   * @param title 見出しタイトル（例：「メニュー（税抜・初期）」）
-   * @param menu キー：メニュー名, 値：価格のマップ
-   */
-  private static void printMenu(String title, Map<String, Integer> menu) {
-    System.out.println(title + ": " + menu.size() + "件");
-    // 期待する出力結果のようになるように実装してください。
-  }
-
-  /**
-   * 既存メニューは価格を更新し、未登録メニューは新規追加する。
-   *
-   * @param menu キー：メニュー名, 値：価格のマップ
-   * @param name メニュー名
-   * @param price 価格（税抜）
-   */
-  private static void addOrUpdate(Map<String, Integer> menu, String name, int price) {
-    if (menu.containsKey(name)) {
-      // 実装してください。
-    } else {
-      // 実装してください。
+        System.out.println("---- 片付け（全消去） ----");
+        clearAllMenu(menu);
+        System.out.println("メニュー件数: " + menu.size() + "件");
     }
-  }
 
-  /**
-   * 価格を税込10%に一括変換する（四捨五入で整数化し、全要素を更新する）。
-   *
-   * @param menu キー：メニュー名, 値：価格のマップ
-   */
-  private static void toTaxIncluded(Map<String, Integer> menu) {
-    for (String key : menu.keySet()) {
-      int ex = menu.get(key);
-      int inc = (int) (ex * 1.1); // 四捨五入したいが、切り捨てになってしまっている。
-      menu.put(key, inc);
+    private static void addInitialMenu(Map<String, Integer> menu) {
+        menu.put("カレー", 350);
+        menu.put("ラーメン", 420);
+        menu.put("うどん", 305);
+        menu.put("サラダ", 155);
+        menu.put("パン", 180);
     }
-  }
 
-  /**
-   * 合計金額（values の合計）を計算して返す。
-   *
-   * @param menu キー：メニュー名, 値：価格のマップ
-   * @return 合計金額
-   */
-  private static int sum(Map<String, Integer> menu) {
-    int total = 0;
-    for (int p : menu.values()) {
-      total += p;
+    /**
+     * (2) 一覧出力の実装
+     * entrySet() を使うことで、キーと値を一度に取得し、Mapを再検索する手間を省きます。
+     */
+    private static void printMenu(String title, Map<String, Integer> menu) {
+        System.out.println(title + ": " + menu.size() + "件");
+        for (Map.Entry<String, Integer> entry : menu.entrySet()) {
+            System.out.println(" - " + entry.getKey() + ": " + entry.getValue() + "円");
+        }
     }
-    return total;
-  }
 
-  /**
-   * マップ内の要素をすべて削除する。
-   *
-   * @param menu キー：メニュー名, 値：価格のマップ
-   */
-  private static void clearAllMenu(Map<String, Integer> menu) {
-    // マップ内の要素をすべて削除してください。
-  }
+    /**
+     * (3) 更新/追加の実装
+     */
+    private static void addOrUpdate(Map<String, Integer> menu, String name, int price) {
+        if (menu.containsKey(name)) {
+            menu.replace(name, price); // 既存なら置換
+        } else {
+            menu.put(name, price);     // 新規なら追加
+        }
+    }
+
+    /**
+     * (5) 税込変換の一括処理
+     * replaceAll を使うことで、全ての値をラムダ式で一括変換できます。
+     */
+    private static void toTaxIncluded(Map<String, Integer> menu) {
+        // 四捨五入を実現するために Math.round を使用。引数は double にキャストします。
+        menu.replaceAll((k, v) -> (int) Math.round(v * 1.1));
+    }
+
+    private static int sum(Map<String, Integer> menu) {
+        int total = 0;
+        for (int p : menu.values()) {
+            total += p;
+        }
+        return total;
+    }
+
+    /**
+     * (6) 全消去
+     */
+    private static void clearAllMenu(Map<String, Integer> menu) {
+        menu.clear();
+    }
 }
