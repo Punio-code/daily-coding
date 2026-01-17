@@ -13,16 +13,16 @@ import java.util.Set;
  * (4) 再度状況を表示する。
  * (5) キャンセル（席: 5）を行う。
  * (6) 最後に状況を表示する。
- *
+ * <p>
  * しかし、未実装やロジック上の不具合があり、期待通りの出力になっていません。
  * 下の「▼指示」に従って修正し、「▼期待される出力」の通りに動作させてください。
- *
+ * <p>
  * ▼現在の出力（このまま実行した場合）
  * === 自習室チェックイン（初期） ===
  * 着席中: 3件
- *  - [2]
- *  - [3]
- *  - [5]
+ * - [2]
+ * - [3]
+ * - [5]
  * 空席数: 7席
  * ---- チェックイン ----
  * 席[3] を予約しました。
@@ -30,29 +30,29 @@ import java.util.Set;
  * 席[11] を予約しました。
  * === 現在の状態 ===
  * 着席中: 5件
- *  - [2]
- *  - [3]
- *  - [5]
- *  - [7]
- *  - [11]
+ * - [2]
+ * - [3]
+ * - [5]
+ * - [7]
+ * - [11]
  * 空席数: 5席
  * ---- キャンセル ----
  * 席[5] は予約されていません。
  * === 現在の状態 ===
  * 着席中: 5件
- *  - [2]
- *  - [3]
- *  - [5]
- *  - [7]
- *  - [11]
+ * - [2]
+ * - [3]
+ * - [5]
+ * - [7]
+ * - [11]
  * 空席数: 5席
- *
+ * <p>
  * ▼期待される出力（正しく修正できた場合の例）
  * === 自習室チェックイン（初期） ===
  * 着席中: 3件
- *  - [2]
- *  - [3]
- *  - [5]
+ * - [2]
+ * - [3]
+ * - [5]
  * 空席数: 7席
  * ---- チェックイン ----
  * 席[3] はすでに予約済みです。
@@ -60,127 +60,134 @@ import java.util.Set;
  * 席[11] は無効な席番号です。
  * === 現在の状態 ===
  * 着席中: 4件
- *  - [2]
- *  - [3]
- *  - [5]
- *  - [7]
+ * - [2]
+ * - [3]
+ * - [5]
+ * - [7]
  * 空席数: 6席
  * ---- キャンセル ----
  * 席[5] の予約を取り消しました。
  * === 現在の状態 ===
  * 着席中: 3件
- *  - [2]
- *  - [3]
- *  - [7]
+ * - [2]
+ * - [3]
+ * - [7]
  * 空席数: 7席
- *
+ * <p>
  * ▼指示
  * ・チェックイン処理の不具合を修正する。
- *    - 範囲チェック（1～TOTAL_SEATS 以外は受け付けない）
- *    - 重複チェック（add の戻り値で判定し、重複なら「すでに予約済み」）
+ * - 範囲チェック（1～TOTAL_SEATS 以外は受け付けない）
+ * - 重複チェック（add の戻り値で判定し、重複なら「すでに予約済み」）
  * ・キャンセル処理の不具合を修正する。
- *    - 座席番号で remove し、成功/失敗メッセージを正しく出す。
+ * - 座席番号で remove し、成功/失敗メッセージを正しく出す。
  * ・空席数：TOTAL_SEATS - 予約済みサイズ で計算し、無効番号は数に含めない（＝無効は登録させない）。
- *
+ * <p>
  * ▼ヒント
  * ・addの戻り値がtrueのときは追加できたことを意味し、falseのときはすでにその要素が存在していることを意味する。
  * ・removeの戻り値がtrueのときは削除できたことを意味し、falseのときはすでにその要素が存在しないことを意味する。
  * ・範囲は if (n < 1 || n > TOTAL_SEATS) で弾く。
- *
+ * <p>
  * ▼ねらい（学習項目）
  * ・Set の基本操作：add / remove / contains / size / isEmpty
  * ・バリデーション（範囲チェック）とメッセージ分岐
  */
 public class Main {
-  /**
-   * 自習室の総席数（1～TOTAL_SEATS が有効）
-   */
-  private static final int TOTAL_SEATS = 10;
-  
-  public static void main(String[] args) {
-    Set<Integer> reserved = new LinkedHashSet<>();
+    /**
+     * 自習室の総席数（1～TOTAL_SEATS が有効）
+     */
+    private static final int TOTAL_SEATS = 10;
 
-    // (1) 初期の着席者（席: 2, 3, 5）を登録する。
-    addInitialReservations(reserved);
+    public static void main(String[] args) {
+        Set<Integer> reserved = new LinkedHashSet<>();
 
-    // (2) 現在の状況を表示する。
-    System.out.println("=== 自習室チェックイン（初期） ===");
-    printStatus(reserved);
+        // (1) 初期の着席者（席: 2, 3, 5）を登録する。
+        addInitialReservations(reserved);
 
-    // (3) チェックイン（席: 3, 7, 11）を試す。
-    System.out.println("---- チェックイン ----");
-    checkIn(reserved, 3);   // 本来は重複なので拒否メッセージを表示する。
-    checkIn(reserved, 7);   // 新規なので問題なく追加される。
-    checkIn(reserved, 11);  // 本来は無効（範囲外）メッセージを表示する。
+        // (2) 現在の状況を表示する。
+        System.out.println("=== 自習室チェックイン（初期） ===");
+        printStatus(reserved);
 
-    // (4) 再度状況を表示する。
-    System.out.println("=== 現在の状態 ===");
-    printStatus(reserved);
+        // (3) チェックイン（席: 3, 7, 11）を試す。
+        System.out.println("---- チェックイン ----");
+        checkIn(reserved, 3);   // 本来は重複なので拒否メッセージを表示する。
+        checkIn(reserved, 7);   // 新規なので問題なく追加される。
+        checkIn(reserved, 11);  // 本来は無効（範囲外）メッセージを表示する。
 
-    // (5) キャンセル（席: 5）を行う。
-    System.out.println("---- キャンセル ----");
-    boolean canceled = cancel(reserved, 5); // 本来は存在判定してから削除する。
-    if (canceled) {
-      System.out.println("席[5] の予約を取り消しました。");
-    } else {
-      System.out.println("席[5] は予約されていません。");
+        // (4) 再度状況を表示する。
+        System.out.println("=== 現在の状態 ===");
+        printStatus(reserved);
+
+        // (5) キャンセル（席: 5）を行う。
+        System.out.println("---- キャンセル ----");
+        boolean canceled = cancel(reserved, 5); // 本来は存在判定してから削除する。
+        // (6) 最後に状況を表示する。
+        System.out.println("=== 現在の状態 ===");
+        printStatus(reserved);
     }
 
-    // (6) 最後に状況を表示する。
-    System.out.println("=== 現在の状態 ===");
-    printStatus(reserved);
-  }
-
-  /**
-   * 初期の着席者を登録する。
-   *
-   * @param reserved 予約済み座席番号のSet
-   */
-  private static void addInitialReservations(Set<Integer> reserved) {
-    reserved.add(2);
-    reserved.add(3);
-    reserved.add(5);
-  }
-
-  /**
-   * 指定された座席番号でチェックインする。
-   * ・指定された座席番号が範囲外（1~10以外）の場合 → 「席[〇] は無効な席番号です。」と表示する。
-   * ・指定された座席番号が既にSetの中に存在する場合 → 「席[〇] はすでに予約済みです。」と表示する。
-   * ・上記以外（追加成功）の場合 → 「席[〇] を予約しました。」と表示する。
-   *
-   * @param reserved 予約済み座席番号のSet
-   * @param seatNo   座席番号
-   */
-  private static void checkIn(Set<Integer> reserved, int seatNo) {
-    reserved.add(seatNo);
-    System.out.println("席[" + seatNo + "] を予約しました。");
-  }
-
-  /**
-   * 指定された座席番号が「予約済み座席番号のSet」内に存在する場合だけ、予約を取り消す。
-   *
-   * @param reserved 予約済み座席番号のSet
-   * @param seatNo   キャンセルしたい座席番号
-   * @return 取り消しに成功した場合は true、存在しない場合は false
-   */
-  private static boolean cancel(Set<Integer> reserved, int seatNo) {
-    if (seatNo < reserved.size()) { // 指定の座席番号がreservedに含まれているか確認したい。
-      return reserved.remove(seatNo);
+    /**
+     * 初期の着席者を登録する。
+     *
+     * @param reserved 予約済み座席番号のSet
+     */
+    private static void addInitialReservations(Set<Integer> reserved) {
+        reserved.add(2);
+        reserved.add(3);
+        reserved.add(5);
     }
-    return false;
-  }
 
-  /**
-   * 現在の着席状況を表示する。
-   *
-   * @param reserved 予約済み座席番号のSet
-   */
-  private static void printStatus(Set<Integer> reserved) {
-    System.out.println("着席中: " + reserved.size() + "件");
-    for (int n : reserved) {
-      System.out.println(" - [" + n + "]");
+    /**
+     * 指定された座席番号でチェックインする。
+     * ・指定された座席番号が範囲外（1~10以外）の場合 → 「席[〇] は無効な席番号です。」と表示する。
+     * ・指定された座席番号が既にSetの中に存在する場合 → 「席[〇] はすでに予約済みです。」と表示する。
+     * ・上記以外（追加成功）の場合 → 「席[〇] を予約しました。」と表示する。
+     *
+     * @param reserved 予約済み座席番号のSet
+     * @param seatNo   座席番号
+     */
+    private static void checkIn(Set<Integer> reserved, int seatNo) {
+        if (seatNo < 1 || seatNo > TOTAL_SEATS) {
+            System.out.println("席[" + seatNo + "] は無効な席番号です。");
+            return;
+        }
+        boolean added = reserved.add(seatNo);
+        if (added) {
+            System.out.println("席[" + seatNo + "] を予約しました。");
+        } else {
+            System.out.println("席[" + seatNo + "] はすでに予約済みです。");
+        }
     }
-    int free = TOTAL_SEATS - reserved.size();
-    System.out.println("空席数: " + free + "席");
-  }
+
+    /**
+     * 指定された座席番号が「予約済み座席番号のSet」内に存在する場合だけ、予約を取り消す。
+     *
+     * @param reserved 予約済み座席番号のSet
+     * @param seatNo   キャンセルしたい座席番号
+     * @return 取り消しに成功した場合は true、存在しない場合は false
+     */
+    private static boolean cancel(Set<Integer> reserved, int seatNo) {
+        if (reserved.contains(seatNo)) {
+            // 指定の座席番号がreservedに含まれているか確認したい。
+            System.out.printf("""
+                    席[%d] の予約を取り消しました。%n""", seatNo);
+            return reserved.remove(seatNo);
+        } else
+            System.out.printf("""
+                    席[%d] は予約されていません。%n""", seatNo);
+        return false;
+    }
+
+    /**
+     * 現在の着席状況を表示する。
+     *
+     * @param reserved 予約済み座席番号のSet
+     */
+    private static void printStatus(Set<Integer> reserved) {
+        System.out.println("着席中: " + reserved.size() + "件");
+        for (int n : reserved) {
+            System.out.println(" - [" + n + "]");
+        }
+        int free = TOTAL_SEATS - reserved.size();
+        System.out.println("空席数: " + free + "席");
+    }
 }
