@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
     /*
       ==========================
@@ -17,11 +17,11 @@ public class Main {
       Charlie
       ==========================
     */
-    System.out.println("【1問目】forEach の練習");
-    List<String> names = List.of("Alice", "Bob", "Charlie");
+        System.out.println("【1問目】forEach の練習");
+        List<String> names = List.of("Alice", "Bob", "Charlie");
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        names.forEach(System.out::println);
 
     /*
       ==========================
@@ -36,11 +36,13 @@ public class Main {
       10
       ==========================
     */
-    System.out.println("\n【2問目】map の練習");
-    List<Integer> numbers = List.of(1, 2, 3, 4, 5);
+        System.out.println("\n【2問目】map の練習");
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        numbers.stream()
+                .map(n -> n * 2)
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -53,11 +55,13 @@ public class Main {
       cherry
       ==========================
     */
-    System.out.println("\n【3問目】filter の練習");
-    List<String> words = List.of("apple", "banana", "cherry", "date");
+        System.out.println("\n【3問目】filter の練習");
+        List<String> words = List.of("apple", "banana", "cherry", "date");
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        words.stream()
+                .filter(word -> word.length() >= 5)
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -72,10 +76,10 @@ public class Main {
       5
       ==========================
     */
-    System.out.println("\n【4問目】sorted の練習");
-    List<Integer> nums = List.of(5, 1, 4, 2, 3);
+        System.out.println("\n【4問目】sorted の練習");
+        List<Integer> nums = List.of(5, 1, 4, 2, 3);
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -90,10 +94,10 @@ public class Main {
       4
       ==========================
     */
-    System.out.println("\n【5問目】distinct の練習");
-    List<Integer> dupNumbers = List.of(1, 2, 2, 3, 3, 3, 4);
+        System.out.println("\n【5問目】distinct の練習");
+        List<Integer> dupNumbers = List.of(1, 2, 2, 3, 3, 3, 4);
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -105,10 +109,10 @@ public class Main {
       {java=4, python=6, php=3}
       ==========================
     */
-    System.out.println("\n【6問目】collect の練習");
-    List<String> languages = List.of("java", "python", "php");
+        System.out.println("\n【6問目】collect の練習");
+        List<String> languages = List.of("java", "python", "php");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -120,10 +124,10 @@ public class Main {
       15
       ==========================
     */
-    System.out.println("\n【7問目】reduce の練習");
-    List<Integer> numbers2 = List.of(1, 2, 3, 4, 5);
+        System.out.println("\n【7問目】reduce の練習");
+        List<Integer> numbers2 = List.of(1, 2, 3, 4, 5);
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -135,10 +139,10 @@ public class Main {
       true
       ==========================
     */
-    System.out.println("\n【8問目】anyMatch の練習");
-    List<String> animals = List.of("dog", "cat", "bird");
+        System.out.println("\n【8問目】anyMatch の練習");
+        List<String> animals = List.of("dog", "cat", "bird");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -150,10 +154,10 @@ public class Main {
       true
       ==========================
     */
-    System.out.println("\n【9問目】allMatch の練習");
-    List<Integer> evenNumbers = List.of(2, 4, 6, 8);
+        System.out.println("\n【9問目】allMatch の練習");
+        List<Integer> evenNumbers = List.of(2, 4, 6, 8);
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -165,10 +169,10 @@ public class Main {
       最大値40, 最小値5
       ==========================
     */
-    System.out.println("\n【10問目】max/min の練習");
-    List<Integer> values = List.of(10, 20, 5, 40, 15);
+        System.out.println("\n【10問目】max/min の練習");
+        List<Integer> values = List.of(10, 20, 5, 40, 15);
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -191,14 +195,14 @@ public class Main {
       readable
       ==========================
     */
-    System.out.println("\n【11問目】flatMap の練習");
-    List<String> sentences = List.of(
-        "Java stream is powerful",
-        "stream makes code concise",
-        "concise code is readable"
-    );
+        System.out.println("\n【11問目】flatMap の練習");
+        List<String> sentences = List.of(
+                "Java stream is powerful",
+                "stream makes code concise",
+                "concise code is readable"
+        );
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -212,10 +216,10 @@ public class Main {
       6文字: [banana]
       ==========================
     */
-    System.out.println("\n【12問目】groupingBy の練習");
-    List<String> words2 = List.of("apple", "banana", "pear", "peach", "plum", "grape");
+        System.out.println("\n【12問目】groupingBy の練習");
+        List<String> words2 = List.of("apple", "banana", "pear", "peach", "plum", "grape");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -229,11 +233,11 @@ public class Main {
       CHARLES
       ==========================
     */
-    System.out.println("\n【13問目】チェーン練習（１）");
-    List<String> names2 = List.of("alice", "bob", "christopher", "dave", "amelia", "brian",
-        "charles");
+        System.out.println("\n【13問目】チェーン練習（１）");
+        List<String> names2 = List.of("alice", "bob", "christopher", "dave", "amelia", "brian",
+                "charles");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -245,10 +249,10 @@ public class Main {
       32
       ==========================
     */
-    System.out.println("\n【14問目】チェーン練習（２）");
-    List<String> strNumbers = List.of("10", "x", "21", "004", "seven", "18");
+        System.out.println("\n【14問目】チェーン練習（２）");
+        List<String> strNumbers = List.of("10", "x", "21", "004", "seven", "18");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -271,14 +275,14 @@ public class Main {
       tokyo
       ==========================
     */
-    System.out.println("\n【15問目】チェーン練習（３）");
-    List<String> csv = List.of(
-        "tokyo, osaka, nagoya",
-        "osaka, fukuoka",
-        "sapporo, tokyo"
-    );
+        System.out.println("\n【15問目】チェーン練習（３）");
+        List<String> csv = List.of(
+                "tokyo, osaka, nagoya",
+                "osaka, fukuoka",
+                "sapporo, tokyo"
+        );
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -298,10 +302,10 @@ public class Main {
       a: 2
       ==========================
     */
-    System.out.println("\n【16問目】チェーン練習（４）");
-    List<String> animals2 = List.of("Cat", "cow", "camel", "dog", "Deer", "duck", "ant", "Ape");
+        System.out.println("\n【16問目】チェーン練習（４）");
+        List<String> animals2 = List.of("Cat", "cow", "camel", "dog", "Deer", "duck", "ant", "Ape");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -315,18 +319,18 @@ public class Main {
       Alice
       ==========================
     */
-    System.out.println("\n【17問目】チェーン練習（５）");
-    record Person(String name, List<Integer> scores) {
+        System.out.println("\n【17問目】チェーン練習（５）");
+        record Person(String name, List<Integer> scores) {
 
-    }
-    List<Person> people = List.of(
-        new Person("Alice", List.of(80, 90, 75)),
-        new Person("Bob", List.of(70, 65)),
-        new Person("Carol", List.of(100, 95, 90)),
-        new Person("Dave", List.of(60))
-    );
+        }
+        List<Person> people = List.of(
+                new Person("Alice", List.of(80, 90, 75)),
+                new Person("Bob", List.of(70, 65)),
+                new Person("Carol", List.of(100, 95, 90)),
+                new Person("Dave", List.of(60))
+        );
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -342,10 +346,10 @@ public class Main {
       [1082, 1280, 2450, 2900]
       ==========================
     */
-    System.out.println("\n【18問目】セール計算ゲーム");
-    List<Integer> basePrices = List.of(980, 1200, 2500, 510, 3000);
+        System.out.println("\n【18問目】セール計算ゲーム");
+        List<Integer> basePrices = List.of(980, 1200, 2500, 510, 3000);
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -363,11 +367,11 @@ public class Main {
       [https://example.com/u/alice, https://example.com/u/bobsmith, https://example.com/u/charlie99, https://example.com/u/dve, https://example.com/u/superlonghandlename]
       ==========================
     */
-    System.out.println("\n【19問目】SNSプロフィールURLメーカー");
-    List<String> handles = List.of("Alice", "bob_smith", "  CHARLIE 99  ", "D@ve!!",
-        "super-long-handle-name");
+        System.out.println("\n【19問目】SNSプロフィールURLメーカー");
+        List<String> handles = List.of("Alice", "bob_smith", "  CHARLIE 99  ", "D@ve!!",
+                "super-long-handle-name");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
     /*
@@ -384,12 +388,12 @@ public class Main {
       [#TheMatrix, #SpiritedAway, #Interstellar, #A, #LordoftheRings]
       ==========================
     */
-    System.out.println("\n【20問目】映画タイトルでハッシュタグ生成");
-    List<String> movieTitles = List.of("  The Matrix  ", "Spirited Away", "Interstellar", "A",
-        "Lord of the Rings");
+        System.out.println("\n【20問目】映画タイトルでハッシュタグ生成");
+        List<String> movieTitles = List.of("  The Matrix  ", "Spirited Away", "Interstellar", "A",
+                "Lord of the Rings");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
 
 
-  }
+    }
 }
