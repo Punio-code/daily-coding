@@ -379,6 +379,21 @@ public class Main {
 
         // 以下に回答コードを書いてください
 
+        people.stream()
+                //public java.util.stream.Stream<E>
+                //真偽値を抽出　average()はoptionalDouble型なのでここで終われない
+                //並び替え
+                //任意の2つの値（k, v）を、後段で getKey()/getValue() として扱える“ペア”にする
+                .map(p -> Map.entry(
+                        p.name(),
+                        p.scores().stream()
+                                .mapToInt(Integer::intValue)
+                                .average()
+                                .orElse(0.0)))
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(2)
+                .map(Map.Entry::getKey)
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -397,8 +412,12 @@ public class Main {
         List<Integer> basePrices = List.of(980, 1200, 2500, 510, 3000);
 
         // 以下に回答コードを書いてください
-
-
+        List<Integer> saleTotal = basePrices.stream()
+                .map(k -> (int) (k * 0.9))
+                .map(v -> v + 200)
+                .filter(e -> e >= 1000)
+                .collect(Collectors.toList());
+        System.out.println(saleTotal);
     /*
       ==========================
       19問目: SNSプロフィールURLメーカー（map → map → filter → リスト変数）
@@ -419,8 +438,14 @@ public class Main {
                 "super-long-handle-name");
 
         // 以下に回答コードを書いてください
+        List<String> profileUrls =
+                handles.stream().map(e -> e.toLowerCase())
+                        .map(e -> e.trim().replaceAll("[^A-Za-z0-9]", ""))
+                        .filter(e -> e.length() <= 20)
+                        .map(e -> "https://example.com/u/" + e)
+                        .toList();
 
-
+        System.out.println(profileUrls);
     /*
       ==========================
       20問目: 映画タイトルでハッシュタグ生成（map → map → filter → リスト変数）
@@ -440,7 +465,12 @@ public class Main {
                 "Lord of the Rings");
 
         // 以下に回答コードを書いてください
-
-
+        List<String> hashtags = movieTitles.stream()
+                .map(String::trim)
+                .map(e -> e.replaceAll("\\s+", ""))
+                .map(e -> "#" + e)
+                .filter(v -> v.length() <= 15)
+                .collect(Collectors.toList());
+        System.out.println(hashtags);
     }
 }
