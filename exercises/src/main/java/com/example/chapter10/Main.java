@@ -1,6 +1,7 @@
 package com.example.chapter10;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -80,7 +81,10 @@ public class Main {
         List<Integer> nums = List.of(5, 1, 4, 2, 3);
 
         // 以下に回答コードを書いてください
-
+        nums.stream()
+                //小さい順に並べて表示する
+                .sorted()
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -98,7 +102,9 @@ public class Main {
         List<Integer> dupNumbers = List.of(1, 2, 2, 3, 3, 3, 4);
 
         // 以下に回答コードを書いてください
-
+        dupNumbers.stream()
+                .distinct()
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -113,13 +119,19 @@ public class Main {
         List<String> languages = List.of("java", "python", "php");
 
         // 以下に回答コードを書いてください
-
-
+        //Map型　Stringのデータを受け取り、Integerを返す。　その変数の箱はresult 　入力元のStringのデータ（laguagesの個々の要素)に連続処理（stream)を施します
+        Map<String, Integer> result = languages.stream()
+                //その連続処理のフローは*Stream の要素列を「別の形（データ構造や集計結果）」に畳み込む（＝終端操作）*から始まります、その入力、つまりストリームの各要素を (キー, 値) に変換して Map に put していく Collector を生成
+                .collect(Collectors.toMap(
+                        x -> x,
+                        String::length
+                ));
+        //.collectはMap は「キー → 値（value）」の対応（エントリ）の集合　を作るﾒｿｯﾄﾞです。
+        System.out.println(result);
     /*
       ==========================
       7問目: reduce の練習
       変数 numbers2 のすべての要素の合計を reduce を使って計算してください。
-
       ▼出力結果
       15
       ==========================
@@ -128,8 +140,9 @@ public class Main {
         List<Integer> numbers2 = List.of(1, 2, 3, 4, 5);
 
         // 以下に回答コードを書いてください
-
-
+        int sum = numbers2.stream()
+                .reduce(0, Integer::sum);
+        System.out.println(sum);
     /*
       ==========================
       8問目: anyMatch の練習
@@ -143,13 +156,14 @@ public class Main {
         List<String> animals = List.of("dog", "cat", "bird");
 
         // 以下に回答コードを書いてください
-
-
+        boolean hasCat = animals.stream()
+                .anyMatch("cat"::equals);
+        //終端操作は Stream以外を返す、または void　つまりbooleanを返すと終端操作としてﾊﾟｲﾌﾟﾗｲﾝは確定終了する　terminal operation　
+        System.out.println(hasCat);
     /*
       ==========================
       9問目: allMatch の練習
       変数 evenNumbers の要素がすべて偶数かどうかを判定して表示してください。
-
       ▼出力結果
       true
       ==========================
@@ -158,8 +172,10 @@ public class Main {
         List<Integer> evenNumbers = List.of(2, 4, 6, 8);
 
         // 以下に回答コードを書いてください
-
-
+        boolean allEven = evenNumbers.stream()
+                // 入力に対し　2で割ったときの余りが０（つまり偶数である　を判定　した値をかえす
+                .allMatch(n -> n % 2 == 0);
+        System.out.println(allEven);
     /*
       ==========================
       10問目: max/min の練習
@@ -173,8 +189,10 @@ public class Main {
         List<Integer> values = List.of(10, 20, 5, 40, 15);
 
         // 以下に回答コードを書いてください
-
-
+        IntSummaryStatistics stats = values.stream()
+                .mapToInt(Integer::intValue)
+                .summaryStatistics();
+        System.out.println(STR."最大値\{stats.getMax()}, 最小値\{stats.getMin()}");
     /*
       ==========================
       11問目: flatMap の練習
@@ -203,7 +221,9 @@ public class Main {
         );
 
         // 以下に回答コードを書いてください
-
+        sentences.stream()
+                .flatMap(s -> Arrays.stream(s.trim().split("\\s+")))
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -220,8 +240,12 @@ public class Main {
         List<String> words2 = List.of("apple", "banana", "pear", "peach", "plum", "grape");
 
         // 以下に回答コードを書いてください
-
-
+        Map<Integer, List<String>> grouped = words2.stream()
+                //配列を作るのでcollect groupingBy(String型のlengthに従って）
+                .collect(Collectors.groupingBy(String::length//何をキーにして分けるか
+                        , TreeMap::new,//どのMapに詰めるか（HashMapかTreeMapか等）
+                        Collectors.toList()));//分けた後の値をどう加工・集計するか
+        grouped.forEach((length, ws) -> System.out.println(STR."\{length}文字:\{ws}"));
     /*
       ==========================
       13問目: 複数メソッドチェーン練習（１）
@@ -238,8 +262,12 @@ public class Main {
                 "charles");
 
         // 以下に回答コードを書いてください
-
-
+        names2.stream()
+                .filter(n -> n.length() >= 4)
+                .map(String::toUpperCase)
+                .sorted(Comparator.reverseOrder())
+                .limit(3)
+                .forEach(System.out::println);
     /*
       ==========================
       14問目: 複数メソッドチェーン練習（２）
@@ -253,8 +281,12 @@ public class Main {
         List<String> strNumbers = List.of("10", "x", "21", "004", "seven", "18");
 
         // 以下に回答コードを書いてください
-
-
+        int sumStrNumbers = strNumbers.stream()
+                .filter(s -> s.matches("\\d+"))
+                .mapToInt(Integer::parseInt)
+                .filter(s -> s % 2 == 0)
+                .reduce(0, Integer::sum);
+        System.out.println(sumStrNumbers);
     /*
       ==========================
       15問目: 複数メソッドチェーン練習（３）
@@ -280,11 +312,14 @@ public class Main {
                 "tokyo, osaka, nagoya",
                 "osaka, fukuoka",
                 "sapporo, tokyo"
-        );
-
-        // 以下に回答コードを書いてください
-
-
+        );// 以下に回答コードを書いてください
+        csv.stream()
+                .flatMap(a -> Arrays.stream(a.split(",")))
+                .map(String::trim)
+                .filter(name -> name.length() >= 5)
+                .distinct()
+                .sorted()
+                .forEach(System.out::println);
     /*
       ==========================
       16問目: 複数メソッドチェーン練習（４）
@@ -306,6 +341,18 @@ public class Main {
         List<String> animals2 = List.of("Cat", "cow", "camel", "dog", "Deer", "duck", "ant", "Ape");
 
         // 以下に回答コードを書いてください
+        animals2.stream()
+                //map の役割：T -> R の変換を 各要素に一様に適用して、Stream<R> を作る（中間操作）
+                .map(String::toLowerCase)
+                //collect は、正確には Stream の要素を“集約（collect）して”、指定した形の結果コンテナ（または集計値）に作り替える終端操作です。
+                .collect(Collectors.groupingBy(s -> s.charAt(0),
+                        Collectors.counting()))
+                //「順番のない対応表を、操作可能な単位（ペア）として扱えるようにする」
+                .entrySet().stream()
+                //Comparator は「順序（ordering）」という意味論を定義するだけで、並べ替えという実行はしません。
+                .sorted(Comparator.comparing(Map.Entry<Character, Long>::getValue).reversed())
+                .forEach(e -> System.out.println(e.getKey() + ": " + e.getValue()));
+
 
 
     /*
