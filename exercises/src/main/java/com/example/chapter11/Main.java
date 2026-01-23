@@ -1,5 +1,6 @@
 package com.example.chapter11;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -7,19 +8,19 @@ import java.util.function.Supplier;
 
 /**
  * Optional のよく使うメソッドを一気に練習できる 15 問。
- *
+ * <p>
  * ルール:
  * - 各セクションの「// 以下に回答コードを書いてください」の下だけ編集してください。
  * - 実装は Optional を用いること。
  * - 出力内容はコメントの "▼期待する出力結果" を参考にしてください（順不同と書いてあるものは順不同OK）。
  */
 public class Main {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
     /*
       ==========================
       1問目: Optionalの生成 of / empty / ofNullable
-      
+
       文字列 name の Optional を3通りで生成して、中身がある場合のみ表示してください。
       null のときは何も表示しないでください（ifPresent）。
 
@@ -28,16 +29,23 @@ public class Main {
       Alice
       ==========================
     */
-    System.out.println("【1問目】of / empty / ofNullable");
-    String name = "Alice";
+        System.out.println("【1問目】of / empty / ofNullable");
+        String name = "Alice";
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
+        List<Optional<String>> listForQuestion1 = List.of(
+                Optional.of(name),
+                Optional.empty(),
+                Optional.ofNullable(name)
+        );
 
-
+        listForQuestion1.stream()
+                .flatMap(Optional::stream)
+                .forEach(System.out::println);
     /*
       ==========================
       2問目: isPresent / isEmpty / get
-      
+
       age1, age2 の値の有無で「年齢あり/年齢なし」と表示してください。
       あえて ifPresent は使わず、
       age1 は isPresent を使い、
@@ -48,17 +56,23 @@ public class Main {
       年齢なし
       ==========================
     */
-    System.out.println("\n【2問目】isPresent / isEmpty");
-    Optional<Integer> age1 = Optional.of(20);
-    Optional<Integer> age2 = Optional.empty();
+        System.out.println("\n【2問目】isPresent / isEmpty");
+        Optional<Integer> age1 = Optional.of(20);
+        Optional<Integer> age2 = Optional.empty();
 
-    // 以下に回答コードを書いてください
-
-
+        // 以下に回答コードを書いてください
+        List<Optional<Integer>> listForQuestion2 = List.of(age1, age2);
+        listForQuestion2.forEach(e -> {
+            if (e.isPresent()) {
+                System.out.println("年齢あり: " + e.get());
+            } else if (e.isEmpty()) {
+                System.out.println("年齢なし");
+            }
+        });
     /*
       ==========================
       3問目: map
-      
+
       title1, title2 内の値を大文字に変換して表示してください。
       空の場合は何も表示しないでください。
 
@@ -66,13 +80,16 @@ public class Main {
       JAVA
       ==========================
     */
-    System.out.println("\n【3問目】map");
-    Optional<String> title1 = Optional.of("java");
-    Optional<String> title2 = Optional.empty();
-
-    // 以下に回答コードを書いてください
-
-
+        System.out.println("\n【3問目】map");
+        Optional<String> title1 = Optional.of("java");
+        Optional<String> title2 = Optional.empty();
+        // 以下に回答コードを書いてください
+        List<Optional<String>> listForQuestion3 = List.of(title1, title2);
+        listForQuestion3.stream()
+                .flatMap(Optional::stream)
+                .map(String::toUpperCase)
+                .forEach(System.out::println);
+        ;
     /*
       ==========================
       4問目: filter
@@ -84,12 +101,16 @@ public class Main {
       foo@example.com
       ==========================
     */
-    System.out.println("\n【4問目】filter");
-    Optional<String> email1 = Optional.of("foo@example.com");
-    Optional<String> email2 = Optional.of("foo-example.com");
+        System.out.println("\n【4問目】filter");
+        Optional<String> email1 = Optional.of("foo@example.com");
+        Optional<String> email2 = Optional.of("foo-example.com");
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        List<Optional<String>> listForQuestion4 = List.of(email1, email2);
+        listForQuestion4.stream()
+                .flatMap(Optional::stream)
+                .filter(e -> e.contains("@"))
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -110,16 +131,19 @@ public class Main {
       value=5
       ==========================
     */
-    System.out.println("\n【5問目】orElse vs orElseGet");
-    Optional<Integer> discount1 = Optional.of(10);
-    Optional<Integer> discount2 = Optional.empty();
-    Supplier<Integer> heavy = () -> {
-      System.out.println("heavy called");
-      return 5;
-    };
+        System.out.println("\n【5問目】orElse vs orElseGet");
+        Optional<Integer> discount1 = Optional.of(10);
+        Optional<Integer> discount2 = Optional.empty();
+        Supplier<Integer> heavy = () -> {
+            System.out.println("heavy called");
+            return 5;
+        };
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        List<Optional<Integer>> listForQuestion5 = List.of(discount1, discount2);
+        listForQuestion5.forEach(e ->
+                System.out.println("value  = " + e.orElseGet(heavy))
+        );
 
     /*
       ==========================
@@ -133,12 +157,19 @@ public class Main {
       （2つ目は例外が投げられる）
       ==========================
     */
-    System.out.println("\n【6問目】orElseThrow");
-    Optional<String> token1 = Optional.of("abc123");
-    Optional<String> token2 = Optional.empty();
+        System.out.println("\n【6問目】orElseThrow");
+        Optional<String> token1 = Optional.of("abc123");
+        Optional<String> token2 = Optional.empty();
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        List<Optional<String>> listForQuestion6 = List.of(token1, token2);
+        try {
+            for (Optional<String> s : listForQuestion6) {
+                System.out.println(s.orElseThrow(IllegalStateException::new));
+            }
+        } catch (IllegalStateException e) {
+            System.out.println("IllegalStateException!!");
+        }
 
     /*
       ==========================
@@ -151,12 +182,17 @@ public class Main {
       名無し
       ==========================
     */
-    System.out.println("\n【7問目】ifPresentOrElse");
-    Optional<String> nickname1 = Optional.of("Bob");
-    Optional<String> nickname2 = Optional.empty();
+        System.out.println("\n【7問目】ifPresentOrElse");
+        Optional<String> nickname1 = Optional.of("Bob");
+        Optional<String> nickname2 = Optional.empty();
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        List<Optional<String>> listForQuestion7 = List.of(nickname1, nickname2);
+        for (Optional<String> s : listForQuestion7) {
+            s.ifPresentOrElse(
+                    e -> System.out.println("Hi, " + e), () -> System.out.println("名無し")
+            );
+        }
 
     /*
       ==========================
@@ -168,11 +204,13 @@ public class Main {
       inner
       ==========================
     */
-    System.out.println("\n【8問目】flatMap");
-    Optional<Optional<String>> nested = Optional.of(Optional.of("inner"));
+        System.out.println("\n【8問目】flatMap");
+        Optional<Optional<String>> nested = Optional.of(Optional.of("inner"));
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        nested.stream()
+                .flatMap(Optional<String>::stream)
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -186,16 +224,18 @@ public class Main {
       Dave
       ==========================
     */
-    System.out.println("\n【9問目】Optional.stream");
-    List<Optional<String>> nameOptList = List.of(
-        Optional.of("Alice"),
-        Optional.empty(),
-        Optional.of("Carol"),
-        Optional.of("Dave")
-    );
+        System.out.println("\n【9問目】Optional.stream");
+        List<Optional<String>> nameOptList = List.of(
+                Optional.of("Alice"),
+                Optional.empty(),
+                Optional.of("Carol"),
+                Optional.of("Dave")
+        );
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        nameOptList.stream()
+                .flatMap(Optional<String>::stream)
+                .forEach(System.out::println);
 
     /*
       ==========================
@@ -207,13 +247,14 @@ public class Main {
       max=9
       ==========================
     */
-    System.out.println("\n【10問目】stream の max と Optional");
-    List<Integer> values = List.of(1, 9, 3, 4);
+        System.out.println("\n【10問目】stream の max と Optional");
+        List<Integer> values = List.of(1, 9, 3, 4);
 
-    // 以下に回答コードを書いてください
-
-
-    /*
+        // 以下に回答コードを書いてください
+        Optional<Integer> answerForQuestion10 = values.stream()
+                .max(Comparator.naturalOrder());
+        answerForQuestion10.ifPresent(e -> System.out.println("max = " + e));
+        /*
       ==========================
       11問目: ofNullable と Map#get の相性
 
@@ -226,13 +267,16 @@ public class Main {
       Atlantis -> 不明
       ==========================
     */
-    System.out.println("\n【11問目】ofNullable x Map#get");
-    Map<String, String> prefectureMap = Map.of("Tokyo", "東京都", "Osaka", "大阪府");
+        System.out.println("\n【11問目】ofNullable x Map#get");
+        Map<String, String> prefectureMap = Map.of("Tokyo", "東京都", "Osaka", "大阪府");
 
-    // 以下に回答コードを書いてください
-
-
-
+        // 以下に回答コードを書いてください
+        List<String> keys = List.of("Tokyo", "Atlantis");
+        for (String k : keys) {
+            System.out.println(
+                    k + " -> " + Optional.ofNullable(prefectureMap.get(k)).orElse("不明")
+            );
+        }
     /*
       ==========================
       12問目: ネストしたオブジェクトから安全に city を取得
@@ -244,11 +288,13 @@ public class Main {
       unknown
       ==========================
     */
-    System.out.println("\n【12問目】ネストの安全参照");
-    User u1 = new User("1", new FullName("Taro", "Yamada"), Optional.of(30), Optional.empty(), Optional.of("Tokyo"));
-    User u2 = new User("2", new FullName("Hanako", "Sato"), Optional.empty(), Optional.empty(), Optional.empty());
+        System.out.println("\n【12問目】ネストの安全参照");
+        User u1 = new User("1", new FullName("Taro", "Yamada"), Optional.of(30), Optional.empty(), Optional.of("Tokyo"));
+        User u2 = new User("2", new FullName("Hanako", "Sato"), Optional.empty(), Optional.empty(), Optional.empty());
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
+        System.out.println(u1.city().orElse("unknown"));
+        System.out.println(u2.city().orElse("unknown"));
 
 
     /*
@@ -264,12 +310,19 @@ public class Main {
       （2つ目は例外）
       ==========================
     */
-    System.out.println("\n【13問目】バリデーション");
-    Optional<String> codeOk = Optional.of("A1b2");
-    Optional<String> codeNg = Optional.of("###");
+        System.out.println("\n【13問目】バリデーション");
+        Optional<String> codeOk = Optional.of("A1b2");
+        Optional<String> codeNg = Optional.of("###");
 
-    // 以下に回答コードを書いてください
+        // 以下に回答コードを書いてください
+        List<Optional<String>> input = List.of(codeOk, codeNg);
+        input.forEach(opt -> {
+            String code = opt
+                    .filter(s -> s.matches("[A-Za-z0-9]{4}"))
+                    .orElseThrow(IllegalArgumentException::new);
 
+            System.out.println("OK: " + code);
+        });
 
 
     /*
@@ -283,12 +336,15 @@ public class Main {
       在庫なし
       ==========================
     */
-    System.out.println("\n【14問目】在庫メッセージ");
-    Optional<Integer> stock1 = Optional.of(3);
-    Optional<Integer> stock2 = Optional.empty();
+        System.out.println("\n【14問目】在庫メッセージ");
+        Optional<Integer> stock1 = Optional.of(3);
+        Optional<Integer> stock2 = Optional.empty();
 
-    // 以下に回答コードを書いてください
-
+        // 以下に回答コードを書いてください
+        List<Optional<Integer>> stocks = List.of(stock1, stock2);
+        for (Optional<Integer> stock : stocks) {
+            stock.ifPresentOrElse(System.out::println, () -> System.out.println("在庫なし"));
+        }
 
     /*
       ==========================
@@ -305,15 +361,16 @@ public class Main {
       Osaka
       ==========================
     */
-    System.out.println("\n【15問目】応用（Optional + map + orElse）");
-    List<User> users = List.of(
-        new User("a1", new FullName("Taro", "Yamada"), Optional.of(20), Optional.empty(), Optional.of("Tokyo")),
-        new User("a2", new FullName("Hanako", "Sato"), Optional.empty(), Optional.of("hanako@example.com"), Optional.empty()),
-        new User("a3", new FullName("Jiro", "Tanaka"), Optional.of(30), Optional.empty(), Optional.of("Osaka"))
-    );
+        System.out.println("\n【15問目】応用（Optional + map + orElse）");
+        List<User> users = List.of(
+                new User("a1", new FullName("Taro", "Yamada"), Optional.of(20), Optional.empty(), Optional.of("Tokyo")),
+                new User("a2", new FullName("Hanako", "Sato"), Optional.empty(), Optional.of("hanako@example.com"), Optional.empty()),
+                new User("a3", new FullName("Jiro", "Tanaka"), Optional.of(30), Optional.empty(), Optional.of("Osaka"))
+        );
 
-    // 以下に回答コードを書いてください
-
-
-  }
+        // 以下に回答コードを書いてください
+        users.stream()
+                .map(i -> i.city().orElse("N/A"))
+                .forEach(System.out::println);
+    }
 }
