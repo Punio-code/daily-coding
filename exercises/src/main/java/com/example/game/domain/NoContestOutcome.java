@@ -5,13 +5,7 @@ import com.example.game.player.Player;
 import java.util.List;
 
 
-public final class NoContestOutcome implements Outcome {
-
-    private final NoContestReason reason;
-
-    public NoContestOutcome(NoContestReason reason) {
-        this.reason = reason;
-    }
+public record NoContestOutcome(NoContestReason reason) implements Outcome {
 
     @Override
     public boolean isDecided() {
@@ -26,10 +20,5 @@ public final class NoContestOutcome implements Outcome {
     @Override
     public List<Player> losers() {
         return List.of();
-    }
-
-    @Override
-    public NoContestReason reason() {
-        return reason;
     }
 }
